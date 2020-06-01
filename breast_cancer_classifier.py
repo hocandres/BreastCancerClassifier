@@ -1,5 +1,26 @@
 def make_training_set(training_file_name):
-    return []
+    '''Reads a training set from the specified file.
+       return list of tuples in format: id, diagnosis, 9 attributes.'''
+    training_set_list = []
+    # open file
+    training_file = open(training_file_name)
+    # read each line in the file
+    for line_str in training_file:
+        line_str = line_str.strip() # strip off EOF character '\n'
+        # parse the line into its 11 parts
+        id_str,a1,a2,a3,a4,a5,a6,a7,a8,a9,diagnosis_str = line_str.split(',')
+        if diagnosis_str == '4': # diagnosis is 'malignant'
+            diagnosis_str = 'm'
+        else:
+            diagnosis_str = 'b' # diagnosis is 'benign'
+        # create a tuple for the patient
+        patient_tuple = id_str, diagnosis_str,int(a1),int(a2),int(a3),int(a4),\
+            int(a5),int(a6),int(a7),int(a8),int(a9)
+        # append to the end of the training_set list
+        training_set_list.append(patient_tuple)
+    # close file
+    training_file.close()
+    return training_set_list # return the training set
 
 def train_classifier(training_set_list):
     return []
